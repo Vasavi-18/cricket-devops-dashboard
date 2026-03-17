@@ -28,7 +28,7 @@ app.get("/search", (req, res) => {
 
 // health check
 app.get("/", (req, res) => {
-  res.send("Backend running securely 🚀");
+  res.send("Pipeline deployed successfully 🚀🔥");
 });
 
 app.listen(5000, () => console.log("Server running on port 5000"));
