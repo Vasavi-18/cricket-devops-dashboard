@@ -1,35 +1,51 @@
-name: Deploy to EC2
+name: DevSecOps Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
-  deploy:
+  build-test-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
 
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v0.1.6
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
-          port: 22
-          script: |
-                 if [ ! -d "cricket-devops-dashboard" ]; then
-                 git clone https://github.com/Vasavi-18/cricket-devops-dashboard.git
-                 fi
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-                 cd cricket-devops-dashboard
-                 git pull origin main
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20
 
-                 sudo docker stop cricket-dashboard || true
-                 sudo docker rm cricket-dashboard || true
+    - name: Install dependencies
+      run: |
+        cd backend
+        npm install
 
-                 sudo docker build -t cricket-dashboard .
-                 sudo docker run -d -p 8080:80 --name cricket-dashboard cricket-dashboard
+    - name: Run basic test
+      run: |
+        cd backend
+        node server.js &
+        sleep 5
+        curl http://localhost:5000
+
+    # 🔐 SECURITY SCAN (DevSecOps part)
+    - name: Run npm audit
+      run: |
+        cd backend
+        npm audit --audit-level=high || true
+
+    # 🚀 DEPLOY TO EC2
+    - name: Deploy to EC2 via SSH
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ubuntu
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          cd cricket-devops-dashboard
+          git pull origin main
+          cd backend
+          npm install
+          pm2 restart cricket-api
