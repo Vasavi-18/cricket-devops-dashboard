@@ -1,325 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cricket LiveHub | Cloud Edition</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    :root {
-      --bg: #0b0f1a;
-      --card: rgba(255, 255, 255, 0.03);
-      --card-hover: rgba(255, 255, 255, 0.07);
-      --border: rgba(255, 255, 255, 0.1);
-      --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.3);
-      --green: #4ade80;
-      --red: #f87171;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-    }
-
-    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif; }
-
-    body {
-      background-color: var(--bg);
-      background-image: 
-        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.05) 0%, transparent 25%),
-        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.05) 0%, transparent 25%);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* HEADER */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 5%;
-      background: rgba(11, 15, 26, 0.8);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .brand { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-    .brand span { color: var(--accent); }
-
-    .pipeline-status {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.85rem;
-      background: rgba(74, 222, 128, 0.1);
-      padding: 6px 12px;
-      border-radius: 20px;
-      border: 1px solid rgba(74, 222, 128, 0.2);
-      color: var(--green);
-    }
-
-    /* CONTAINER */
-    .container {
-      padding: 3rem 5%;
-      max-width: 1400px;
-      margin: auto;
-    }
-
-    .title-section {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .title-section h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .aws-badge {
-      display: inline-block;
-      font-size: 0.75rem;
-      background: #232f3e;
-      color: #ff9900;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-weight: 600;
-      margin-top: 10px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    /* CARD SYSTEM */
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 1.5rem;
-      backdrop-filter: blur(12px);
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      background: var(--card-hover);
-      border-color: var(--accent);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-
-    /* MATCH UI */
-    .live-tag {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--red);
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--red);
-      border-radius: 50%;
-      position: relative;
-    }
-
-    .pulse-dot::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: var(--red);
-      border-radius: 50%;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.8; }
-      100% { transform: scale(3); opacity: 0; }
-    }
-
-    .match-name { font-weight: 600; margin-bottom: 1rem; font-size: 1.1rem; color: var(--muted); }
-    .score-big { 
-      font-size: 3rem; 
-      font-weight: 700; 
-      color: var(--accent); 
-      margin: 1rem 0;
-      text-shadow: 0 0 20px var(--accent-glow);
-    }
-
-    .stat-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; }
-    .stat-label { color: var(--muted); }
-
-    /* CHART UI */
-    .chart-container {
-      height: 220px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      padding-top: 20px;
-    }
-
-    .bar-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 1;
-      height: 100%;
-      justify-content: flex-end;
-      gap: 8px;
-    }
-
-    .bar {
-      width: 80%;
-      background: linear-gradient(to top, var(--accent), #7dd3fc);
-      border-radius: 4px 4px 0 0;
-      transition: height 1s ease-out;
-      position: relative;
-    }
-
-    .bar.red { background: linear-gradient(to top, var(--red), #fda4af); }
-    
-    .over-label { font-size: 10px; color: var(--muted); }
-
-    /* COMMENTARY UI */
-    .commentary-list {
-      height: 200px;
-      overflow-y: auto;
-      padding-right: 10px;
-    }
-
-    .commentary-list::-webkit-scrollbar { width: 4px; }
-    .commentary-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-
-    .event {
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.85rem;
-    }
-
-    .event span { font-weight: 700; color: var(--accent); margin-right: 10px; }
-    .wicket { color: var(--red); font-weight: 700; }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 4rem 0 2rem;
-      color: var(--muted);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--border);
-      margin-top: 4rem;
-    }
-
-    footer i { color: var(--red); }
-
-    @media (max-width: 1024px) {
-      .grid { grid-template-columns: 1fr; }
-      header { flex-direction: column; gap: 1rem; text-align: center; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket LiveHub | Premium Insights</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
 
-<header>
-  <div class="brand">🏏 <span>Cricket</span> LiveHub</div>
-  <div class="pipeline-status">
-    <i class="fa-solid fa-circle-check"></i>
-    DevOps Pipeline: Healthy (v2.4.0)
-  </div>
-</header>
-
-<div class="container">
-
-  <div class="title-section">
-    <h2>Match Center: Premium Insights</h2>
-    <p style="color:var(--muted);">Global real-time data streaming via AWS Lambda & EC2</p>
-    <div class="aws-badge"><i class="fa-brands fa-aws"></i> ap-south-2 (Hyderabad)</div>
-  </div>
-
-  <div class="grid">
-
-    <div class="card">
-      <div class="live-tag">
-        <div class="pulse-dot"></div> Live
-      </div>
-      <div class="match-name">India 🇮🇳 vs Pakistan 🇵🇰</div>
-      <div class="score-big">178/5</div>
-      
-      <div class="stat-row">
-        <span class="stat-label">Overs</span>
-        <span>18.2 <small>/ 20</small></span>
-      </div>
-      <div class="stat-row">
-        <span class="stat-label">Run Rate</span>
-        <span>9.71</span>
-      </div>
-      <div class="stat-row">
-        <span class="stat-label">Target</span>
-        <span style="color:var(--accent)">199</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="match-name" style="margin-bottom:0;"><i class="fa-solid fa-chart-line"></i> Run Rate Trend</div>
-      <div class="chart-container">
-        <div class="bar-wrapper">
-          <div class="bar" style="height: 40%;"></div>
-          <span class="over-label">Ov 5</span>
+    <header>
+        <div class="header-left">
+            <h1>Cricket LiveHub <span class="live-pill"><i class="fa-solid fa-tower-broadcast"></i> Live</span></h1>
         </div>
-        <div class="bar-wrapper">
-          <div class="bar" style="height: 60%;"></div>
-          <span class="over-label">Ov 10</span>
+        <div class="header-right">
+            <span class="pipeline">DevOps Pipeline Status: <span class="status-active">Active</span></span>
+            <span class="location">• Hyderabad Time 16:52 IST • Hyderabad, India</span>
+            <button class="refresh-btn"><i class="fa-solid fa-rotate-right"></i></button>
         </div>
-        <div class="bar-wrapper">
-          <div class="bar red" style="height: 35%;"></div>
-          <span class="over-label">Ov 12</span>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="main-title">
+            <h2>Match Center: Premium Insights</h2>
+            <p>Real-time cricket data and cloud intelligence, optimized for speed.</p>
         </div>
-        <div class="bar-wrapper">
-          <div class="bar" style="height: 75%;"></div>
-          <span class="over-label">Ov 15</span>
+
+        <div class="dashboard-grid">
+            
+            <section class="card match-detail-card">
+                <div class="live-dot-container"><span class="dot pulse-green"></span></div>
+                <div class="match-header">
+                    <div class="team">
+                        <img src="https://flagcdn.com/w40/in.png" alt="India">
+                        <span>India IN</span>
+                    </div>
+                    <div class="score-main">
+                        <h3>178/5</h3>
+                        <p>18.2 Overs</p>
+                    </div>
+                    <div class="team">
+                        <img src="https://flagcdn.com/w40/pk.png" alt="Pakistan">
+                        <span>Pakistan PK</span>
+                    </div>
+                </div>
+
+                <div class="batsmen-table">
+                    <div class="table-header"><span>Batting batsmen</span> <i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <div class="player-row"><span>Pant 45*(32)</span> <span>Shaheen 3-0-28-1</span></div>
+                    <div class="player-row"><span>Jadeja 12(10)</span> <span>3-0-28-1</span></div>
+                </div>
+
+                <div class="match-info-box">
+                    <p class="target">Target: 199</p>
+                    <p class="prediction">India needs 21 runs in 16 balls</p>
+                    <div class="last-over">
+                        <span>Last over balls:</span>
+                        <div class="balls">
+                            <span class="ball">4</span><span class="ball">1</span><span class="ball wicket">W</span><span class="ball">2</span><span class="ball">1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rates">
+                    <span>Current RR: 9.71</span>
+                    <span>Req RR: 7.87</span>
+                </div>
+
+                <div class="mini-chart-container">
+                    <p>Wicket-fall progression <i class="fa-solid fa-chart-line"></i></p>
+                    <div class="svg-wrapper">
+                        <svg viewBox="0 0 200 60">
+                            <path d="M0,50 L40,45 L80,55 L120,40 L160,48 L200,35" fill="none" stroke="#38bdf8" stroke-width="2"/>
+                            <circle cx="80" cy="55" r="3" fill="#ef4444" />
+                            <circle cx="160" cy="48" r="3" fill="#ef4444" />
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card trends-card">
+                <div class="trend-section">
+                    <h4>Run Rate and Wicket Trend</h4>
+                    <div class="svg-wrapper large-chart">
+                        <svg viewBox="0 0 300 150">
+                            <polyline points="0,140 50,110 100,90 150,70 200,60 250,40 300,30" fill="none" stroke="#38bdf8" stroke-width="2" />
+                            <polyline points="0,140 50,120 100,105 150,95 200,85 250,70 300,55" fill="none" stroke="#ef4444" stroke-width="2" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="trend-section">
+                    <h4>Run Rate and Wicket Trend</h4>
+                    <div class="svg-wrapper large-chart">
+                        <svg viewBox="0 0 300 150">
+                            <polyline points="0,140 60,130 120,110 180,100 240,80 300,60" fill="none" stroke="#38bdf8" stroke-width="2" />
+                            <polyline points="0,140 60,135 120,120 180,90 240,70 300,40" fill="none" stroke="#ef4444" stroke-width="2" />
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card commentary-card">
+                <div class="match-header mini">
+                    <img src="https://flagcdn.com/w40/au.png" alt="Australia">
+                    <div class="mini-score">
+                        <h3>156/7</h3>
+                        <p>19.0 Overs</p>
+                    </div>
+                    <img src="https://flagcdn.com/w40/gb.png" alt="England">
+                </div>
+
+                <div class="commentary-box">
+                    <div class="comment-item">Ball-by-ball commentary</div>
+                    <div class="comment-item">Ball-by-ball commentary</div>
+                    <div class="comment-item">Ball-by-ball commentary</div>
+                    <div class="comment-item">Ball-by-ball commentary</div>
+                    <div class="comment-item">Ball-by-ball commentary</div>
+                    <div class="comment-item">Ball-by-ball commentary</div>
+                </div>
+                
+                <div class="footer-stats">
+                    <p>Target: 201</p>
+                    <p>Needs 45 in 6 balls</p>
+                    <div class="balls">Last: 2 . 1 <span class="ball wicket">W</span> <span class="ball wicket">W</span> 1</div>
+                </div>
+            </section>
+
         </div>
-        <div class="bar-wrapper">
-          <div class="bar" style="height: 90%;"></div>
-          <span class="over-label">Ov 18</span>
-        </div>
-      </div>
-      <p style="font-size: 0.7rem; color:var(--muted); text-align:center; margin-top:1rem;">Real-time Over-by-Over Velocity</p>
-    </div>
 
-    <div class="card">
-      <div class="live-tag"><div class="pulse-dot"></div> Live</div>
-      <div class="match-name">Australia 🇦🇺 vs England 🏴󠁧󠁢󠁥󠁮󠁧󠁿</div>
-      <div class="stat-row" style="margin-bottom: 1.5rem;">
-        <span class="score-big" style="font-size: 1.8rem; margin:0;">156/7</span>
-        <span style="text-align: right; font-size: 0.8rem; color: var(--muted);">19.0 Overs<br>Req RR: 13.8</span>
-      </div>
-
-      <div class="commentary-list">
-        <div class="event"><span>19.4</span> 4 Runs! Smashed over mid-wicket 🔥</div>
-        <div class="event"><span>19.3</span> 2 runs, good running between wickets</div>
-        <div class="event"><span>19.2</span> <span class="wicket">WICKET!</span> Clean bowled by Wood ❌</div>
-        <div class="event"><span>19.1</span> 1 run, tucked to the leg side</div>
-        <div class="event"><span>18.6</span> Dot ball, end of a great over</div>
-      </div>
-    </div>
-
-  </div>
-
-  <footer>
-    Project by <strong>Vasavi</strong> • Hosted on <strong>AWS EC2</strong> • CI/CD by <strong>GitHub Actions</strong><br>
-    Built with <i class="fa-solid fa-heart"></i> and Dockerized Containers.
-  </footer>
-
-</div>
+        <footer>
+            Built with <i class="fa-solid fa-heart" style="color: #ef4444;"></i> by Vasavi • Cloud Services (<span class="blue">AWS</span> • Docker • <span class="blue">Git-CI/CD</span>) • Hyderabad, India
+        </footer>
+    </main>
 
 </body>
 </html>
