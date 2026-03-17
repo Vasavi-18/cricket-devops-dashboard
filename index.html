@@ -130,7 +130,7 @@
 </html>
 <script>
 async function testAPI() {
-  const res = await fetch("http://localhost:5000/search?q=V.kohli");
+  const res = await fetch("/api/search?q=V.kohli");
   const data = await res.text();
 
   console.log("API Response:", data);
