@@ -3,12 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cricket Match Dashboard</title>
+  <title>Cricket LiveHub • DevOps Optimized</title>
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/502/502195.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --bg-start: #0f172a;
+      --bg-end: #020617;
+      --card: rgba(255,255,255,0.05);
+      --text: #fff;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --success: #22c55e;
+      --danger: #ef4444;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -17,9 +31,8 @@
     }
 
     body {
-      background: linear-gradient(135deg, #0f172a, #020617);
-      color: #fff;
-      min-height: 100vh;
+      background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+      color: var(--text);
     }
 
     header {
@@ -30,19 +43,16 @@
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    header h1 {
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
+    header h1 span { color: var(--accent); }
 
-    header span {
-      color: #38bdf8;
+    .status {
+      font-size: 13px;
+      color: var(--success);
     }
 
     .container {
       padding: 40px;
-      max-width: 1000px;
+      max-width: 1200px;
       margin: auto;
     }
 
@@ -56,53 +66,76 @@
       margin-bottom: 10px;
     }
 
-    .title p {
-      color: #94a3b8;
-    }
-
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      gap: 20px;
     }
 
     .card {
-      background: rgba(255,255,255,0.05);
+      background: var(--card);
       padding: 25px;
       border-radius: 15px;
-      backdrop-filter: blur(10px);
-      transition: 0.3s ease;
-      border: 1px solid rgba(255,255,255,0.1);
+      transition: 0.3s;
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
     .card:hover {
-      transform: translateY(-5px) scale(1.02);
-      border-color: #38bdf8;
+      transform: translateY(-5px);
+      border-color: var(--accent);
     }
 
-    .match {
-      font-size: 20px;
+    .live {
+      color: var(--danger);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .teams {
+      font-size: 18px;
       font-weight: 600;
       margin-bottom: 15px;
     }
 
-    .info {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
-      color: #cbd5f5;
+    .score {
+      font-size: 22px;
+      color: var(--accent);
+      margin-bottom: 10px;
     }
 
-    .highlight {
-      color: #38bdf8;
+    .info {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #000;
       font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0ea5e9;
     }
 
     footer {
       text-align: center;
       margin-top: 50px;
-      color: #64748b;
-      font-size: 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Responsive Fix */
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
     }
   </style>
 </head>
@@ -110,50 +143,68 @@
 <body>
 
 <header>
-  <h1>🏏 <span>Cricket</span> Dashboard</h1>
-  <div>Live • DevOps Powered ⚡</div>
+  <h1>🏏 <span>Cricket</span> LiveHub</h1>
+  <div class="status">● DevOps Pipeline Active</div>
 </header>
 
 <div class="container">
 
   <div class="title">
-    <h2>Match Overview</h2>
-    <p>Real-time cricket insights powered by cloud automation</p>
+    <h2>Live Match Dashboard</h2>
+    <p style="color:#94a3b8;">Real-time insights powered by AWS + Docker + CI/CD</p>
   </div>
 
-  <div class="cards">
+  <div class="cards" id="matches"></div>
 
-    <div class="card">
-      <div class="match">India 🇮🇳 vs Pakistan 🇵🇰</div>
-      <div class="info">
-        <span>Score</span>
-        <span class="highlight">178 / 5</span>
-      </div>
-      <div class="info">
-        <span>Overs</span>
-        <span>18.2</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="match">Australia 🇦🇺 vs England 🏴</div>
-      <div class="info">
-        <span>Score</span>
-        <span class="highlight">156 / 7</span>
-      </div>
-      <div class="info">
-        <span>Overs</span>
-        <span>19.0</span>
-      </div>
-    </div>
-
-  </div>
+  <center>
+    <button onclick="refreshData()">🔄 Refresh Data</button>
+  </center>
 
   <footer>
-    Built with ❤️ by Vasavi • AWS • Docker • CI/CD
+    Built with ❤️ by Vasavi • AWS • Docker • GitHub Actions
   </footer>
 
 </div>
+
+<script>
+  const matches = [
+    {
+      teams: "India 🇮🇳 vs Pakistan 🇵🇰",
+      score: "178/5",
+      overs: "18.2",
+      status: "Live"
+    },
+    {
+      teams: "Australia 🇦🇺 vs England 🇬🇧",
+      score: "156/7",
+      overs: "19.0",
+      status: "Live"
+    }
+  ];
+
+  function renderMatches() {
+    const container = document.getElementById("matches");
+    container.innerHTML = "";
+
+    matches.forEach(match => {
+      container.innerHTML += `
+        <div class="card">
+          <div class="live">🔴 ${match.status}</div>
+          <div class="teams">${match.teams}</div>
+          <div class="score">${match.score}</div>
+          <div class="info">Overs: ${match.overs}</div>
+        </div>
+      `;
+    });
+  }
+
+  function refreshData() {
+    alert("Simulating live update 🚀");
+    renderMatches();
+  }
+
+  renderMatches();
+</script>
 
 </body>
 </html>
