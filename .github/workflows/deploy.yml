@@ -21,10 +21,15 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           port: 22
           script: |
-            cd cricket-devops-dashboard || git clone https://github.com/Vasavi-18/cricket-devops-dashboard.git
-            cd cricket-devops-dashboard
-            git pull origin main
-            docker stop cricket-dashboard || true
-            docker rm cricket-dashboard || true
-            docker build -t cricket-dashboard .
-            docker run -d -p 80:80 --name cricket-dashboard cricket-dashboard
+                 if [ ! -d "cricket-devops-dashboard" ]; then
+                 git clone https://github.com/Vasavi-18/cricket-devops-dashboard.git
+                 fi
+
+                 cd cricket-devops-dashboard
+                 git pull origin main
+
+                 sudo docker stop cricket-dashboard || true
+                 sudo docker rm cricket-dashboard || true
+
+                 sudo docker build -t cricket-dashboard .
+                 sudo docker run -d -p 80:80 --name cricket-dashboard cricket-dashboard
