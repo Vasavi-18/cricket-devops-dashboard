@@ -1,138 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cricket LiveHub | Premium Insights</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cricket LiveHub | Premium Insights</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <header>
-        <div class="header-left">
-            <h1>Cricket LiveHub <span class="live-pill"><i class="fa-solid fa-tower-broadcast"></i> Live</span></h1>
-        </div>
-        <div class="header-right">
-            <span class="pipeline">DevOps Pipeline Status: <span class="status-active">Active</span></span>
-            <span class="location">• Hyderabad Time 16:52 IST • Hyderabad, India</span>
-            <button class="refresh-btn"><i class="fa-solid fa-rotate-right"></i></button>
-        </div>
-    </header>
+  <header>
+    <div class="brand">Cricket LiveHub <span class="live-pill">((v)) Live</span></div>
+    <div class="header-info">
+      <span class="pipeline">DevOps Pipeline Status: <span class="active">Active</span></span>
+      <span class="meta">• Hyderabad Time 16:52 IST • Hyderabad, India</span>
+      <button class="refresh-btn"><i class="fa-solid fa-rotate-right"></i></button>
+    </div>
+  </header>
 
-    <main class="dashboard-container">
-        <div class="main-title">
-            <h2>Match Center: Premium Insights</h2>
-            <p>Real-time cricket data and cloud intelligence, optimized for speed.</p>
-        </div>
+  <main class="container">
+    <div class="page-title">
+      <h2>Match Center: Premium Insights</h2>
+      <p>Real-time cricket data and cloud intelligence, optimized for speed.</p>
+    </div>
 
-        <div class="dashboard-grid">
-            
-            <section class="card match-detail-card">
-                <div class="live-dot-container"><span class="dot pulse-green"></span></div>
-                <div class="match-header">
-                    <div class="team">
-                        <img src="https://flagcdn.com/w40/in.png" alt="India">
-                        <span>India IN</span>
-                    </div>
-                    <div class="score-main">
-                        <h3>178/5</h3>
-                        <p>18.2 Overs</p>
-                    </div>
-                    <div class="team">
-                        <img src="https://flagcdn.com/w40/pk.png" alt="Pakistan">
-                        <span>Pakistan PK</span>
-                    </div>
-                </div>
-
-                <div class="batsmen-table">
-                    <div class="table-header"><span>Batting batsmen</span> <i class="fa-solid fa-clock-rotate-left"></i></div>
-                    <div class="player-row"><span>Pant 45*(32)</span> <span>Shaheen 3-0-28-1</span></div>
-                    <div class="player-row"><span>Jadeja 12(10)</span> <span>3-0-28-1</span></div>
-                </div>
-
-                <div class="match-info-box">
-                    <p class="target">Target: 199</p>
-                    <p class="prediction">India needs 21 runs in 16 balls</p>
-                    <div class="last-over">
-                        <span>Last over balls:</span>
-                        <div class="balls">
-                            <span class="ball">4</span><span class="ball">1</span><span class="ball wicket">W</span><span class="ball">2</span><span class="ball">1</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rates">
-                    <span>Current RR: 9.71</span>
-                    <span>Req RR: 7.87</span>
-                </div>
-
-                <div class="mini-chart-container">
-                    <p>Wicket-fall progression <i class="fa-solid fa-chart-line"></i></p>
-                    <div class="svg-wrapper">
-                        <svg viewBox="0 0 200 60">
-                            <path d="M0,50 L40,45 L80,55 L120,40 L160,48 L200,35" fill="none" stroke="#38bdf8" stroke-width="2"/>
-                            <circle cx="80" cy="55" r="3" fill="#ef4444" />
-                            <circle cx="160" cy="48" r="3" fill="#ef4444" />
-                        </svg>
-                    </div>
-                </div>
-            </section>
-
-            <section class="card trends-card">
-                <div class="trend-section">
-                    <h4>Run Rate and Wicket Trend</h4>
-                    <div class="svg-wrapper large-chart">
-                        <svg viewBox="0 0 300 150">
-                            <polyline points="0,140 50,110 100,90 150,70 200,60 250,40 300,30" fill="none" stroke="#38bdf8" stroke-width="2" />
-                            <polyline points="0,140 50,120 100,105 150,95 200,85 250,70 300,55" fill="none" stroke="#ef4444" stroke-width="2" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="trend-section">
-                    <h4>Run Rate and Wicket Trend</h4>
-                    <div class="svg-wrapper large-chart">
-                        <svg viewBox="0 0 300 150">
-                            <polyline points="0,140 60,130 120,110 180,100 240,80 300,60" fill="none" stroke="#38bdf8" stroke-width="2" />
-                            <polyline points="0,140 60,135 120,120 180,90 240,70 300,40" fill="none" stroke="#ef4444" stroke-width="2" />
-                        </svg>
-                    </div>
-                </div>
-            </section>
-
-            <section class="card commentary-card">
-                <div class="match-header mini">
-                    <img src="https://flagcdn.com/w40/au.png" alt="Australia">
-                    <div class="mini-score">
-                        <h3>156/7</h3>
-                        <p>19.0 Overs</p>
-                    </div>
-                    <img src="https://flagcdn.com/w40/gb.png" alt="England">
-                </div>
-
-                <div class="commentary-box">
-                    <div class="comment-item">Ball-by-ball commentary</div>
-                    <div class="comment-item">Ball-by-ball commentary</div>
-                    <div class="comment-item">Ball-by-ball commentary</div>
-                    <div class="comment-item">Ball-by-ball commentary</div>
-                    <div class="comment-item">Ball-by-ball commentary</div>
-                    <div class="comment-item">Ball-by-ball commentary</div>
-                </div>
-                
-                <div class="footer-stats">
-                    <p>Target: 201</p>
-                    <p>Needs 45 in 6 balls</p>
-                    <div class="balls">Last: 2 . 1 <span class="ball wicket">W</span> <span class="ball wicket">W</span> 1</div>
-                </div>
-            </section>
-
+    <div class="dashboard-grid">
+      
+      <section class="card main-match">
+        <div class="card-status"><span class="pulse-dot"></span></div>
+        <div class="teams-top">
+          <div class="team">
+            <img src="https://flagcdn.com/w40/in.png" alt="India">
+            <p>India IN</p>
+          </div>
+          <div class="score-center">
+            <h3>178/5</h3>
+            <p>18.2 Overs</p>
+          </div>
+          <div class="team">
+            <img src="https://flagcdn.com/w40/pk.png" alt="Pakistan">
+            <p>Pakistan PK</p>
+          </div>
         </div>
 
-        <footer>
-            Built with <i class="fa-solid fa-heart" style="color: #ef4444;"></i> by Vasavi • Cloud Services (<span class="blue">AWS</span> • Docker • <span class="blue">Git-CI/CD</span>) • Hyderabad, India
-        </footer>
-    </main>
+        <div class="data-section">
+          <div class="section-header"><span>BATTING BATSMEN</span> <i class="fa-solid fa-clock-rotate-left"></i></div>
+          <div class="row"><span>V.kohli 45*(32)</span> <span class="muted">Shaheen 3-0-28-1</span></div>
+          <div class="row"><span>Hardik 12(10)</span> <span class="muted">3-0-28-1</span></div>
+        </div>
 
+        <div class="match-math">
+          <p class="muted">Target: 199</p>
+          <p class="highlight">India needs 21 runs in 16 balls</p>
+          <div class="ball-tracker">
+            <span>Last over balls:</span>
+            <div class="balls">
+              <span>4</span><span>1</span><span class="w">W</span><span>2</span><span>1</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="run-rates">
+          <span>Current RR: 9.71</span>
+          <span>Req RR: 7.87</span>
+        </div>
+
+        <div class="mini-chart">
+          <p class="section-header">Wicket-fall progression <i class="fa-solid fa-chart-line"></i></p>
+          <svg viewBox="0 0 200 40" class="sparkline">
+            <path d="M0,35 L40,30 L80,38 L120,20 L160,25 L200,10" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <circle cx="80" cy="38" r="3" fill="#ef4444" />
+            <circle cx="160" cy="25" r="3" fill="#ef4444" />
+          </svg>
+        </div>
+      </section>
+
+      <section class="card trends">
+        <div class="trend-box">
+          <h4>Run Rate and Wicket Trend</h4>
+          <svg viewBox="0 0 300 120">
+            <polyline points="0,110 50,90 100,75 150,60 200,55 250,40 300,30" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <polyline points="0,110 50,100 100,90 150,85 200,70 250,60 300,50" fill="none" stroke="#ef4444" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="trend-box">
+          <h4>Run Rate and Wicket Trend</h4>
+          <svg viewBox="0 0 300 120">
+            <polyline points="0,110 60,105 120,90 180,75 240,60 300,45" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <polyline points="0,110 60,108 120,95 180,65 240,50 300,35" fill="none" stroke="#ef4444" stroke-width="2"/>
+          </svg>
+        </div>
+      </section>
+
+      <section class="card commentary">
+        <div class="teams-mini">
+           <img src="https://flagcdn.com/w40/au.png" alt="Australia">
+           <div class="mini-score">
+             <h4>156/7</h4>
+             <p>19.0 Overs</p>
+           </div>
+           <img src="https://flagcdn.com/w40/gb.png" alt="England">
+        </div>
+
+        <div class="commentary-list">
+          <div class="item">Ball-by-ball commentary</div>
+          <div class="item">Ball-by-ball commentary</div>
+          <div class="item">Ball-by-ball commentary</div>
+          <div class="item">Ball-by-ball commentary</div>
+          <div class="item">Ball-by-ball commentary</div>
+        </div>
+
+        <div class="footer-stats">
+          <p>Target: 201 | Needs 45 in 6 balls</p>
+          <div class="ball-tracker">
+             Last: 2 . 1 <span class="w">W</span> <span class="w">W</span> 1
+          </div>
+          <p class="run-rates">Current RR: 8.21 <span style="margin-left:auto">Req RR: 45.00</span></p>
+        </div>
+      </section>
+
+    </div>
+
+    <footer>
+      Built with <i class="fa-solid fa-heart" style="color:#ef4444"></i> by Vasavi • Cloud Services (<span class="blue">AWS</span> • Docker • <span class="blue">Git-CI/CD</span>) • Hyderabad, India
+    </footer>
+  </main>
 </body>
 </html>
