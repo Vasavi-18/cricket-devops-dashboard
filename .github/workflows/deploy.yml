@@ -32,4 +32,4 @@ jobs:
                  sudo docker rm cricket-dashboard || true
 
                  sudo docker build -t cricket-dashboard .
-                 sudo docker run -d -p 80:80 --name cricket-dashboard cricket-dashboardgi
+                 sudo docker run -d -p 80:80 --name cricket-dashboard cricket-dashboard
