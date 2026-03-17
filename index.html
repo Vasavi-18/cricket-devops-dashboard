@@ -1,24 +1,158 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Cricket Match Dashboard</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cricket Match Dashboard</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f172a, #020617);
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    header span {
+      color: #38bdf8;
+    }
+
+    .container {
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .title h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .title p {
+      color: #94a3b8;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 25px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      transition: 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: #38bdf8;
+    }
+
+    .match {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      color: #cbd5f5;
+    }
+
+    .highlight {
+      color: #38bdf8;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #64748b;
+      font-size: 14px;
+    }
+  </style>
 </head>
 
 <body>
 
-<h1>🏏 Cricket Match Dashboard</h1>
+<header>
+  <h1>🏏 <span>Cricket</span> Dashboard</h1>
+  <div>Live • DevOps Powered ⚡</div>
+</header>
 
-<div class="card">
-<h2>India vs Pakistan</h2>
-<p>Score: 178 / 5</p>
-<p>Overs: 18.2</p>
-</div>
+<div class="container">
 
-<div class="card">
-<h2>Australia vs England</h2>
-<p>Score: 156 / 7</p>
-<p>Overs: 19.0</p>
+  <div class="title">
+    <h2>Match Overview</h2>
+    <p>Real-time cricket insights powered by cloud automation</p>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="match">India 🇮🇳 vs Pakistan 🇵🇰</div>
+      <div class="info">
+        <span>Score</span>
+        <span class="highlight">178 / 5</span>
+      </div>
+      <div class="info">
+        <span>Overs</span>
+        <span>18.2</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="match">Australia 🇦🇺 vs England 🏴</div>
+      <div class="info">
+        <span>Score</span>
+        <span class="highlight">156 / 7</span>
+      </div>
+      <div class="info">
+        <span>Overs</span>
+        <span>19.0</span>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Built with ❤️ by Vasavi • AWS • Docker • CI/CD
+  </footer>
+
 </div>
 
 </body>
