@@ -1,4 +1,4 @@
-# 🏏 Cricket LiveHub — DevOps Powered Dashboard
+# 🏏 Cricket DevOps Dashboard: Secure CI/CD Pipeline with Docker on AWS.
 
 > A modern, cloud-deployed cricket dashboard showcasing **real-time match insights** with a fully automated **CI/CD pipeline** using AWS, Docker, and GitHub Actions.
 
