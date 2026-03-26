@@ -151,16 +151,6 @@ on:
 
 ---
 
-## 🚀 Future Enhancements
-
-* 📡 Live cricket API integration
-* 📊 Advanced charts using Chart.js
-* 🔁 Auto-refresh data (real-time updates)
-* 📱 Mobile-first responsive design
-* ☁️ Deploy using Kubernetes (EKS)
-
----
-
 ## 👩‍💻 Author
 
 **Vasavi**
